@@ -7,7 +7,7 @@ header('Content-Type: application/json');
 //initializing our api
 include_once('../core/initialize.php');
 
-//instantiate users
+//instantiate user object
 $users = new User($db);
 
 //users query

@@ -18,7 +18,7 @@ class User {
         $this->conn = $db;
     }
     
-    //get all users and their pets from db
+    //get all users from db
     public function getUsers() {
         //query
         $query = 'SELECT 
@@ -32,6 +32,27 @@ class User {
         return $stmt;
     }
 
+    //gets a single user from the db
+    public function getUser() {
+        $query = 'SELECT 
+                id,
+                username, 
+                display_name, 
+                created_at
+                FROM ' . $this->table . ' 
+                WHERE id = ? 
+                LIMIT 0,1';
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindPAram(1, $this->id); //bind parameters
+        $stmt->execute(); //execute query
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        $this->username = $row['username'];
+        $this->display_name = $row['display_name'];
+        $this->created_at = $row['created_at'];
+    }
+
+    
 }
 
 ?>
