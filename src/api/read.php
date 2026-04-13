@@ -11,7 +11,7 @@ include_once('../core/initialize.php');
 $users = new User($db);
 
 //users query
-$results = $post->read();
+$results = $users->getUsers();
 $num = $results->rowCount();
 
 if($num > 0) {

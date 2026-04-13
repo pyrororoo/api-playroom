@@ -23,15 +23,14 @@ class Pet {
                 p.id AS pet_id,
                 p.pet_name, 
                 p.pet_type, 
-                p.user_id
-                u.display_name AS owner_name
+                p.user_id,
+                u.display_name AS owner_name,
                 u.username AS owner_username
-                FROM ' . $this->table 'p
+                FROM ' . $this->table . ' p
                 LEFT JOIN users u ON p.user_id = u.id';
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         return $stmt;
 
 }
-
-?>
+}

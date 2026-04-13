@@ -6,13 +6,13 @@
     defined('DS') ? null : define('DS', DIRECTORY_SEPARATOR);
 
     //supply 'api-playroom' with the correct path to the site root, so that it can be used in the rest of the code
-    defined('ROOT') ? null : define('ROOT', DS . 'htdocs' . DS . 'api-playroom' . DS);
+    defined('ROOT') ? null : define('ROOT', dirname(__DIR__, 2) . DS);
     
     //defines \include and \core path as the site root
     defined('INC_PATH') ? null : define('INC_PATH', ROOT . 'src' . DS . 'include' . DS);
     defined('CORE_PATH') ? null : define('CORE_PATH', ROOT . 'src' . DS . 'core' . DS);
 
-    //load db config file
+    //load db config 
     require_once(INC_PATH . 'db.php');
 
     //core classes 
