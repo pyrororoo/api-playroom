@@ -1,8 +1,9 @@
-# USERS AND PET TRACKING SYSTEM - REST API
+# USERS AND PET TRACKING SYSTEM - SAMPLE REST API
 
 ## [📝] Before you start...
 1. Clone this repository into your device in `xampp/htdocs/`. Preferably, name it `api-playroom`
 2. Import the database version you want into `localhost/phpMyAdmin`
+3. Go to `./xampp/php/php.ini` and uncomment `;extension=pdo` and `;extension=pdo_mysql` by removing the semi-colon (;)
 3. **[Optional]** Install the [Postman App](https://www.postman.com/downloads/) to test your APIs without making your own client
 4. **Test the API** by doing something like this:
 ![Sample Postman API Call](sample-postman.png)
