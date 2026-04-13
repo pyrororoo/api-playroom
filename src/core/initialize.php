@@ -17,5 +17,6 @@
 
     //core classes 
     require_once(CORE_PATH . 'users.php');
+    require_once(CORE_PATH . 'pets.php');
 
 ?>
