@@ -1,0 +1,28 @@
+# Git
+.git
+.gitignore
+
+# Docker Compose (not needed in build context)
+docker-compose*.yml
+
+# Environment files (secrets should not be in image)
+.env
+.env.*
+
+# Logs
+*.log
+logs/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Documentation
+README.md
+TODO.md
+AGENTS.md
+doc/

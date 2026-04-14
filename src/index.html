@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API Playroom</title>
+  <style>
+    :root {
+      --bg: #f4f7fb;
+      --card: #ffffff;
+      --text: #10233f;
+      --accent: #1f7aec;
+      --accent-2: #0f5ec2;
+      --border: #dbe4f2;
+      --ok: #166534;
+      --err: #b91c1c;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: radial-gradient(circle at 20% 10%, #dcecff 0%, var(--bg) 45%);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 1.5rem;
+    }
+
+    .wrapper {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero {
+      background: linear-gradient(120deg, var(--accent), var(--accent-2));
+      color: #fff;
+      border-radius: 14px;
+      padding: 1.25rem 1.5rem;
+      box-shadow: 0 10px 24px rgba(16, 35, 63, 0.2);
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      margin: 0 0 0.35rem;
+      font-size: 1.65rem;
+    }
+
+    .panel {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem;
+      box-shadow: 0 6px 14px rgba(16, 35, 63, 0.06);
+      margin-bottom: 1rem;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+      margin-bottom: 0.75rem;
+    }
+
+    label {
+      font-weight: 600;
+    }
+
+    input {
+      width: 120px;
+      padding: 0.45rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+
+    button {
+      border: none;
+      border-radius: 8px;
+      padding: 0.55rem 0.9rem;
+      font-weight: 600;
+      background: var(--accent);
+      color: #fff;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: var(--accent-2);
+    }
+
+    .status {
+      margin: 0.25rem 0 0.5rem;
+      font-size: 0.9rem;
+      min-height: 1.25rem;
+    }
+
+    .status.ok {
+      color: var(--ok);
+    }
+
+    .status.err {
+      color: var(--err);
+    }
+
+    pre {
+      margin: 0;
+      white-space: pre-wrap;
+      word-break: break-word;
+      background: #0f172a;
+      color: #e2e8f0;
+      border-radius: 10px;
+      padding: 0.85rem;
+      min-height: 190px;
+      overflow: auto;
+      font-size: 0.9rem;
+      line-height: 1.45;
+    }
+
+    .hint {
+      margin: 0;
+      color: #3a4f70;
+      font-size: 0.92rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <section class="hero">
+      <h1>API Playroom</h1>
+      <p class="hint">Simple local interface for testing your PHP API endpoints.</p>
+    </section>
+
+    <section class="panel">
+      <div class="controls">
+        <button id="loadUsersBtn" type="button">Load All Users</button>
+      </div>
+      <div id="usersStatus" class="status"></div>
+      <pre id="usersOutput">Click "Load All Users" to call /api/getusers.php</pre>
+    </section>
+
+    <section class="panel">
+      <div class="controls">
+        <label for="userId">User ID</label>
+        <input id="userId" type="number" min="1" value="3">
+        <button id="loadUserBtn" type="button">Load One User</button>
+      </div>
+      <div id="userStatus" class="status"></div>
+      <pre id="userOutput">Enter an ID and click "Load One User" to call /api/getuser.php?id=...</pre>
+    </section>
+  </div>
+
+  <script>
+    const usersOutput = document.getElementById("usersOutput");
+    const usersStatus = document.getElementById("usersStatus");
+    const userOutput = document.getElementById("userOutput");
+    const userStatus = document.getElementById("userStatus");
+    const userIdInput = document.getElementById("userId");
+
+    async function callApi(url, outputEl, statusEl) {
+      statusEl.className = "status";
+      statusEl.textContent = "Loading...";
+
+      try {
+        const response = await fetch(url);
+        const text = await response.text();
+        let payload;
+
+        try {
+          payload = JSON.parse(text);
+          outputEl.textContent = JSON.stringify(payload, null, 2);
+        } catch (parseError) {
+          outputEl.textContent = text || "(empty response)";
+        }
+
+        if (!response.ok) {
+          statusEl.className = "status err";
+          statusEl.textContent = "Request failed: HTTP " + response.status;
+          return;
+        }
+
+        statusEl.className = "status ok";
+        statusEl.textContent = "Success";
+      } catch (error) {
+        statusEl.className = "status err";
+        statusEl.textContent = "Network error: " + error.message;
+        outputEl.textContent = "";
+      }
+    }
+
+    document.getElementById("loadUsersBtn").addEventListener("click", () => {
+      callApi("/api/getusers.php", usersOutput, usersStatus);
+    });
+
+    document.getElementById("loadUserBtn").addEventListener("click", () => {
+      const id = userIdInput.value.trim();
+      if (!id) {
+        userStatus.className = "status err";
+        userStatus.textContent = "Please provide a user ID.";
+        return;
+      }
+
+      callApi("/api/getuser.php?id=" + encodeURIComponent(id), userOutput, userStatus);
+    });
+  </script>
+</body>
+</html>
