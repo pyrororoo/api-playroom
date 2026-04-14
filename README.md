@@ -9,7 +9,7 @@
 ![Sample Postman API Call](sample-postman.png)
 6. Do what you must!
 
-## Current Database Schema
+## [📊] Current Database Schema
 ![Database Schema](db-schema.png)
 
 ## [🌳] Directory Tree
