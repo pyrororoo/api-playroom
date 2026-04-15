@@ -137,7 +137,7 @@
         <button id="loadUsersBtn" type="button">Load All Users</button>
       </div>
       <div id="usersStatus" class="status"></div>
-      <pre id="usersOutput">Click "Load All Users" to call /api/getusers.php</pre>
+      <pre id="usersOutput">Click "Load All Users" to call api/getusers.php</pre>
     </section>
 
     <section class="panel">
@@ -147,7 +147,7 @@
         <button id="loadUserBtn" type="button">Load One User</button>
       </div>
       <div id="userStatus" class="status"></div>
-      <pre id="userOutput">Enter an ID and click "Load One User" to call /api/getuser.php?id=...</pre>
+      <pre id="userOutput">Enter an ID and click "Load One User" to call api/getuser.php?id=...</pre>
     </section>
   </div>
 
@@ -190,7 +190,7 @@
     }
 
     document.getElementById("loadUsersBtn").addEventListener("click", () => {
-      callApi("/api/getusers.php", usersOutput, usersStatus);
+      callApi("api/getusers.php", usersOutput, usersStatus);
     });
 
     document.getElementById("loadUserBtn").addEventListener("click", () => {
@@ -201,7 +201,7 @@
         return;
       }
 
-      callApi("/api/getuser.php?id=" + encodeURIComponent(id), userOutput, userStatus);
+      callApi("api/getuser.php?id=" + encodeURIComponent(id), userOutput, userStatus);
     });
   </script>
 </body>
