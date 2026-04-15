@@ -52,7 +52,7 @@ CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `username` varchar(50) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
-  `created_at` date DEFAULT curdate(),
+  `created_at` date DEFAULT (CURRENT_DATE),
   `display_name` tinytext DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
