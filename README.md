@@ -5,12 +5,21 @@ Sample REST API for users and pets using PHP + MariaDB/MySQL.
 ## Before You Start
 
 1. Clone this repository (if using XAMPP, place it in `xampp/htdocs/` and keep folder name `api-playroom`).
-2. Import `src/database/user_system.2.sql` into your local DB server.
-3. If using XAMPP, ensure `pdo` and `pdo_mysql` are enabled in `xampp/php/php.ini`.
+2. Import `src/database/user_system.2.sql` into your local DB server (for XAMPP, use `http://localhost/phpmyadmin`).
+3. If using XAMPP, ensure `pdo` and `pdo_mysql` are enabled in `xampp/php/php.ini`:
+   - Open `./xampp/php/php.ini`
+   - Uncomment `;extension=pdo` and `;extension=pdo_mysql` (remove the leading `;`)
 4. Choose your runtime mode: Docker, XAMPP, or Hybrid (documented below).
 5. Verify API health after startup:
    - XAMPP: `http://localhost/api-playroom/src/api/healthcheck.php`
    - Docker: `http://localhost:8080/api/healthcheck.php`
+6. Optional: Install [Postman](https://www.postman.com/downloads/) to test APIs without building your own client.
+
+![Sample Postman API Call](sample-postman.png)
+
+6? No 
+
+7. Do what you must!
 
 ## Current Database Schema
 
