@@ -43,13 +43,20 @@ class User {
                 WHERE id = ? 
                 LIMIT 0,1';
         $stmt = $this->conn->prepare($query);
-        $stmt->bindPAram(1, $this->id); //bind parameters
+        $stmt->bindParam(1, $this->id, PDO::PARAM_INT); //bind parameters
         $stmt->execute(); //execute query
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
+        if (!$row) {
+            return false;
+        }
+
+        $this->id = (int)$row['id'];
         $this->username = $row['username'];
         $this->display_name = $row['display_name'];
         $this->created_at = $row['created_at'];
+
+        return true;
     }
 
     
