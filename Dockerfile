@@ -1,4 +1,4 @@
-FROM php:apache-bookworm
+FROM php:8.2.12-apache-bookworm
 
 # Install required PHP extensions
 RUN docker-php-ext-install -j"$(nproc)" pdo_mysql \
